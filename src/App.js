@@ -6,13 +6,20 @@ import PostList from "./PostList";
 function App() {
   const [posts, setPosts] = useState([]);
 
-  // TODO: Add the ability for the <PostCreate /> component to create new posts.
-  // TODO: Add the ability for the <PostList /> component to delete an existing post.
+  const handleCreatePost = (newPost) => {
+    setPosts([...posts, newPost]);
+  };
+
+  const handleDeletePost = (index) => {
+    const updatedPosts = [...posts];
+    updatedPosts.splice(index, 1);
+    setPosts(updatedPosts);
+  };
 
   return (
     <div className="App">
-      <PostCreate />
-      <PostList />
+      <PostCreate onCreatePost={handleCreatePost} />
+      <PostList posts={posts} onDeletePost={handleDeletePost} />
     </div>
   );
 }
